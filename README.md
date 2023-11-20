@@ -3,11 +3,16 @@ CSCI-061 Web Development Final Project Repository
 
 git instructions:
 to refresh your code locally to the main branch.
-1. git pull
+1. When you first open your project
+2. CD into the project directory
+3. git pull
 Done
 
 to refresh publish your code to the main branch.
-1. git add .
-2. git status
-3. git commit -m "your message"
-4. git push
+1. Save all your files.
+2. CD into the project directory
+3. git add .
+4. git status
+5. git commit -m "your message"
+6. git push
+Done
