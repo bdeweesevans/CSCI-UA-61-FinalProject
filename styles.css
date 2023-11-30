@@ -119,3 +119,38 @@ footer {
 .rounded {
     border-radius: 50%;
 }
+
+
+/*The following codes are for the game.html (game)*/
+#gamePage{
+    display: flex;
+}
+
+.cardImg{
+    width: 80%;
+}
+
+.instruction{
+    width: 80%;
+    font-size: 10pt;
+    text-align: left;
+}
+
+.instruction p{
+    font-size: 10pt;
+}
+
+.cardContainer{
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.smSpace{
+    margin-bottom: 20px;
+}
+
+.game{
+    max-width: 1024px;
+}
