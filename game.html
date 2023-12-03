@@ -13,70 +13,79 @@
         <h2>
             Slot Machine
         </h2>
+        <h3>
+            Keys:
+        </h3>
+        <div id="keyCard">
+            <div class="cardContainer"><img src="assets/cardimages/card_back.png"  class="cardImg smSpace" id="key1"></div>
+            <div class="cardContainer"><img src="assets/cardimages/card_back.png"  class="cardImg smSpace" id="key2"></div>
+            <div class="cardContainer"><img src="assets/cardimages/card_back.png"  class="cardImg smSpace" id="key3"></div>
+            <div class="cardContainer"><img src="assets/cardimages/card_back.png"  class="cardImg smSpace" id="key4"></div>
+            <div class="cardContainer"><img src="assets/cardimages/card_back.png"  class="cardImg smSpace" id="key5"></div>
+        </div>
+        <hr>
+        <br>
+        <h3>
+            Your Selection:
+        </h3>
         <div id="gamePage">
             <div id="container1" class="cardContainer">
-                <img src="assets/cardimages/card_back.png"  class="cardImg smSpace">
-                <form class="instruction" id="card1" onsubmit="displayCard()">
+                <img src="assets/cardimages/card_back.png"  class="cardImg smSpace" id="img1">
+                <form class="instruction" id="card1">
                     Enter<p> a Number (2-9)/J/Q/K/A:</p> <input type="text" name="card1_num" id="card1_num" required>
                     Enter a suit: <p>(club
                         / diamond
                         / heart
                         / spade) </p><input type="text" name="card1_suit" id="card1_suit" required>
-                    <button class="smSpace" id="test" onclick="displayCard()">Submit</button>
-                    <input type="reset">
                 </form>
             </div>
             <div id="container2" class="cardContainer">
                 <img src="assets/cardimages/card_back.png"  class="cardImg smSpace">
-                <form class="instruction" id="card2" onsubmit="displayCard()">
+                <form class="instruction" id="card2">
                     Enter<p>a Number (2-9)/J/Q/K/A:</p> <input type="text" name="card2_num" id="card2_num" required>
                     Enter a suit: <p>(club
                         / diamond
                         / heart
                         / spade) </p><input type="text" name="card2_suit" id="card2_suit" required>
-                    <input type="submit" class="smSpace">
-                    <input type="reset">
                 </form>
             </div>
             <div id="container3" class="cardContainer">
                 <img src="assets/cardimages/card_back.png"  class="cardImg smSpace">
-                <form class="instruction" id="card3" onsubmit="displayCard()">
+                <form class="instruction" id="card3">
                     Enter<p>a Number (2-9)/J/Q/K/A:</p> <input type="text" name="card3_num" id="card3_num" required>
                     Enter a suit: <p>(club
                         / diamond
                         / heart
                         / spade) </p><input type="text" name="card3_suit" id="card3_suit" required>
-                    <input type="submit" class="smSpace">
-                    <input type="reset">
                 </form>
             </div>
             <div id="container4" class="cardContainer">
                 <img src="assets/cardimages/card_back.png"  class="cardImg smSpace">
-                <form class="instruction" id="card4" onsubmit="displayCard()">
+                <form class="instruction" id="card4">
                     Enter<p>a Number (2-9)/J/Q/K/A:</p> <input type="text" name="card4_num" id="card4_num" required>
                     Enter a suit: <p>(club
                         / diamond
                         / heart
                         / spade) </p><input type="text" name="card4_suit" id="card4_suit" required>
-                    <input type="submit" class="smSpace">
-                    <input type="reset">
                 </form>
             </div>
             <div id="container5" class="cardContainer">
                 <img src="assets/cardimages/card_back.png"  class="cardImg smSpace">
-                <form class="instruction" id="card5" onsubmit="displayCard()">
+                <form class="instruction" id="card5">
                     Enter<p>a Number (2-9)/J/Q/K/A:</p><input type="text" name="card5_num" id="card5_num" required>
                     Enter a suit: <p>(club
                         / diamond
                         / heart
                         / spade) </p><input type="text" name="card5_suit" id="card5_suit" required>
-                    <input type="submit" class="smSpace">
-                    <input type="reset">
                 </form>
             </div>
         </div>
-        <h3>No repetition please! Confirm your choice by clicking the button below. </h3>
-        <button id="submitBtn" name="submitBtn" >submit</button>
+        <h3 id="result">No repetition please! Confirm your choice by clicking the button below. </h3>
+        <form onsubmit="showKey()" id="toSubmit">
+            <input type="submit" name="submitBtn">
+            <input type="reset">
+        </form>
+        
     </div>
     <br>
     <footer>
