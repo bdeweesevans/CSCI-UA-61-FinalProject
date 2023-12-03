@@ -96,12 +96,12 @@ function receipt() {
     j ++;
   }
 
-  // Chosen Delivery Method
-  if (document.getElementById("shipping").checked) {
-    receiptContent += "<p>Delivery Method: Shipping for $5.00.</p>";
-  } else {
-    receiptContent += "<p>Delivery Method: In-store Pickup for Free.</p>";
-  }
+  // // Chosen Delivery Method
+  // if (document.getElementById("shipping").checked) {
+  //   receiptContent += "<p>Delivery Method: Shipping for $5.00.</p>";
+  // } else {
+  //   receiptContent += "<p>Delivery Method: In-store Pickup for Free.</p>";
+  // }
 
   let grandTotal = document.getElementById("grandTotal").innerText;
   receiptContent += "<p>Grand Total: $" + grandTotal + "</p>";
