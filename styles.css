@@ -88,6 +88,9 @@ a:hover {
 input[type="text"],
 input[type="email"],
 input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="month"],
 textarea {
     font-family: 'Arial', sans-serif;
     width: calc(100% - 20px); /* Full width minus padding */
@@ -103,6 +106,18 @@ textarea {
 textarea {
     height: 100px;
     resize: vertical;
+}
+
+input[type="number"] {
+    font-family: 'Arial', sans-serif;
+    width: 80px; /* Full width minus padding */
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #3d4451;
+    background-color: #2a2d34;
+    color: #c7cacc;
+    box-sizing: border-box;
 }
 
 footer {
