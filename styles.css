@@ -89,6 +89,7 @@ input[type="text"],
 input[type="email"],
 input[type="password"],
 textarea {
+    font-family: 'Arial', sans-serif;
     width: calc(100% - 20px); /* Full width minus padding */
     padding: 10px;
     margin: 10px 0;
@@ -97,6 +98,11 @@ textarea {
     background-color: #2a2d34;
     color: #c7cacc;
     box-sizing: border-box;
+}
+
+textarea {
+    height: 100px;
+    resize: vertical;
 }
 
 footer {
