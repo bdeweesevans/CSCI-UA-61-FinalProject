@@ -24,7 +24,7 @@
             $_SESSION['logged_in'] = true;
 
             // Redirect to different page after successful login
-            header('Location: products.html');
+            header('Location: products.php');
             exit();
         }
     }
