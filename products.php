@@ -1,3 +1,7 @@
+<?php 
+    session_start(); 
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,8 +31,8 @@
                 <p>New Spiderman game?!</p>
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6cbhg24BNYD9JqSkB6wDexsHk_7sqPOC76F5vWSWEEA&s" alt="Product 1" width="200"><br>
                 <label for="quantity1">Quantity:</label>
-                <input type="number" id="quantity1" name="quantity1" value="0" min="0" onchange="updateSubtotal(1, 200)">
-                <p>Unit Cost: $200.00</p>
+                <input type="number" id="quantity1" name="quantity1" value="0" min="0" onchange="updateSubtotal(1, 10)">
+                <p>Unit Cost: $12.00</p>
                 <p>Subtotal: $<span id="subtotal1">0.00</span></p>
               </div>
               
@@ -37,27 +41,21 @@
                 <p>Ryzen CPU!</p>
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXJbfwgNSdbM69N2HNf4LwhOHAJeCBUv_ixhHzbjvGQQ&s" alt="Product 2" width="200"><br>
                 <label for="quantity2">Quantity:</label>
-                <input type="number" id="quantity2" name="quantity2" value="0" min="0" onchange="updateSubtotal(2, 14)">
-                <p>Unit Cost: $14.00</p>
+                <input type="number" id="quantity2" name="quantity2" value="0" min="0" onchange="updateSubtotal(2, 15)">
+                <p>Unit Cost: $20.00</p>
                 <p>Subtotal: $<span id="subtotal2">0.00</span></p>
             </div>
               
             <div id="product3">
-                <h3>10 Game Tokens</h3>
+                <h3>5 Game Tokens</h3>
                 <img src="https://crescent.edu/uploads/editor/images/Blackjack.png" alt="Product 3" width="200"><br>
                 <label for="quantity3">Quantity:</label>
-                <input type="number" id="quantity3" name="quantity3" value="0" min="0" onchange="updateSubtotal(3, 125)">
-                <p>Unit Cost: $125.00</p>
+                <input type="number" id="quantity3" name="quantity3" value="0" min="0" onchange="updateSubtotal(3, 10)">
+                <p>Unit Cost: $10.00</p>
                 <p>Subtotal: $<span id="subtotal3">0.00</span></p>
             </div>
 
-            <!--<h2>Delivery Method:</h2>
-            <input type="radio" id="willCall" name="deliverySelection" value="0" checked>
-            <label for="willCall">Will-Call: Free</label><br>
-            <input type="radio" id="shipping" name="deliverySelection" value="5">
-            <label for="shipping">Shipping: $5.00</label><br>-->
-
-            <p>Grand Total: $<span id="grandTotal">0.00</span></p>
+            <h3>Grand Total: $<span id="grandTotal">0.00</span></h3>
 
             <h2>Your Information:</h2>
 
@@ -73,7 +71,9 @@
 
             <div>
                 Email Address:<br>
-                <input type="email" id="email" name="email" placeholder="youremail@gmail.com" required>
+                <input type="email" id="email" name="email" placeholder="youremail@gmail.com" 
+                    value="<?php echo isset($_SESSION['user_email']) ? $_SESSION['user_email'] : ''; ?>" 
+                    required>
             </div>
 
             <div>
@@ -102,6 +102,11 @@
             <div>
                 Credit Card CVV:<br>
                 <input type="text" id="cc-cvv" name="cc-cvv" pattern="[0-9]{3,4}" placeholder="123" required>
+            </div>
+
+            <div>
+                <input type="checkbox" id="saveInfo" name="saveInfo">
+                <label for="saveInfo">Save my information for next time</label><br><br>
             </div>
 
             <input type="submit" class="submit-button" value="Submit Order">

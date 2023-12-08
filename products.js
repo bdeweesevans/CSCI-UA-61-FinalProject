@@ -1,6 +1,6 @@
 function total() {
   var grandTotal = 0;
-  var prices = [200, 14, 125]; 
+  var prices = [10, 15, 10]; 
 
   // Update subtotal + add subs to total
   for (var i = 1; i <= 3; i++) {
@@ -9,10 +9,6 @@ function total() {
     document.getElementById('subtotal' + i).innerText = subtotal.toFixed(2);
     grandTotal += subtotal;
   }
-
-  // Add delivery to total
-  var deliveryCost = parseFloat(document.querySelector('input[name="deliverySelection"]:checked').value);
-  grandTotal += deliveryCost;
 
   // Update total total
   document.getElementById('grandTotal').innerText = grandTotal.toFixed(2);
@@ -23,10 +19,6 @@ document.getElementById('quantity1').addEventListener('change', total);
 document.getElementById('quantity2').addEventListener('change', total);
 document.getElementById('quantity3').addEventListener('change', total);
 
-// Event listeners for delivery changes
-document.getElementById('willCall').addEventListener('change', total);
-document.getElementById('shipping').addEventListener('change', total);
-
 // Event listener for reset event
 const f = document.forms[0];
 f.addEventListener("reset", (event) => {
@@ -34,7 +26,6 @@ f.addEventListener("reset", (event) => {
     document.getElementById("quantity1").value = 0;
     document.getElementById("quantity2").value = 0;
     document.getElementById("quantity3").value = 0;
-    document.getElementById("willCall").checked = true; // Reset delivery method
     total(); // Recalculate total
 });
 
@@ -57,9 +48,6 @@ f.addEventListener("submit", (event) => {
     isValid = false;
   }
 
-  /*It is impossible for the form to be submitted
-    with an empty element due to the inline verification,
-    so it will never even turn red. But I left the code here.*/
   const requiredFields = ['name', 'phone', 'email', 'address-street', 'address-city', 'address-state', 'address-areacode', 'cc-name', 'cc-number', 'cc-expiration', 'cc-cvv'];
   // Check each required field
   requiredFields.forEach(function(fieldId) {
@@ -96,13 +84,6 @@ function receipt() {
     j ++;
   }
 
-  // // Chosen Delivery Method
-  // if (document.getElementById("shipping").checked) {
-  //   receiptContent += "<p>Delivery Method: Shipping for $5.00.</p>";
-  // } else {
-  //   receiptContent += "<p>Delivery Method: In-store Pickup for Free.</p>";
-  // }
-
   let grandTotal = document.getElementById("grandTotal").innerText;
   receiptContent += "<p>Grand Total: $" + grandTotal + "</p>";
 
@@ -126,7 +107,7 @@ function receipt() {
 
   receiptContent += "</div>";
 
-  receiptContent += "<footer>© 2023 Benjamin DeWeese van Schooneveld</footer></body></html>";
+  receiptContent += "<footer><p>Contributors: BD, JC, HZ</p><a href='https://github.com/bdeweesevans/webdev-final' target='_blank' rel='noopener noreferrer'>Github</a></footer></body></html>";
 
   // Write to new document
   newWindow.document.write(receiptContent);
