@@ -19,12 +19,12 @@
 	$stmt->bindValue(':cash', $cash, SQLITE3_FLOAT);
 	$stmt->bindValue(':tokens', $tokens, SQLITE3_INTEGER);
 
+	$db->close();
+
 	if ($stmt->execute()) {
     // Print JS alert
     	echo "<script>alert('Success! Email: $email, Password: $password'); window.location.href='login.html';</script>";
 	} else {
 	    echo "Error inserting values: " . $db->lastErrorMsg();
 	}
-
-	$db->close();
 ?>
