@@ -74,6 +74,7 @@
 
 <body>
     <div class="container">
+        <div id="header"></div>
         <h1>Shopping</h1>
         <form action="#" method="post">
             <h2>Our Shop:</h2>
