@@ -1,5 +1,5 @@
 <?php
-    session_start(); // Start the session
+    session_start();
 
     ini_set('display_errors', 1);
     error_reporting(E_ALL);
@@ -7,11 +7,9 @@
     $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
 
-    // Database connection
     $db = new SQLite3(__DIR__.'/webDevFinal.db');
 
-    // Prepared statements to prevent SQL injection
-    $stmt = $db->prepare('SELECT * FROM users WHERE email = :email');
+    $stmt = $db->prepare('SELECT * FROM users WHERE email = :email');   // prevent SQL injection
     $stmt->bindValue(':email', $email, SQLITE3_TEXT);
     $result = $stmt->execute();
 
