@@ -1,6 +1,6 @@
 function total() {
     var grandTotal = 0;
-    var prices = [10, 15, 10]; 
+    var prices = [12, 20, 10]; 
 
     // Update subtotal + add subs to total
     for (var i = 1; i <= 3; i++) {
