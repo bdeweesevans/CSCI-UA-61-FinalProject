@@ -1,3 +1,4 @@
+
 $(function()
 {
     var cardSet = new Array(4);
@@ -141,9 +142,9 @@ $(function()
 
     var username = $("#username").val();
     var password = $("#password").val();
-    tokens_earn = correct_count*5;
-
+    
     correct_count = 0;
+    tokens_earn = correct_count*5;
     function showKey(e)
     {
         e.preventDefault();
@@ -165,6 +166,7 @@ $(function()
                 if (suit_ == key_[i][0] && num_ == key_[i][1])
                 {
                     correct_count ++;
+                    tokens_earn = correct_count*5;
                 }
             }
         }
@@ -197,19 +199,22 @@ $(function()
         displayCard(9,$("#card5_num").val(),$("#card5_suit").val());
     });
 
-    function updateTokens(username, tokens) {
-        const url = 'game.php';
+    function updateTokens(tokens_earn) {
+        const url = './update_token.php';
+    
+        var username = "<?php echo $_SESSION['username']; ?>";
     
         const data = new URLSearchParams();
         data.append('username', username);
-        data.append('tokens', tokens);
+        data.append('correctGuess', tokens_earn);
     
+
         fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
-            body: data,
+            body: data.toString(), 
         })
         .then(response => response.text())
         .then(result => {
@@ -220,8 +225,7 @@ $(function()
         });
     }
     
+    updateTokens(tokens_earn);
     
-    
-    updateTokens(username, tokens_earn);
     
 });

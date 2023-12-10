@@ -1,38 +1,51 @@
 <?php
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $username = $_POST['username'];
-        $cashEarned = $_POST['correctGuess'];
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-        $path = "/home/hz2330/databases";
+session_start();
 
-        $db = new SQLite3($path.'/webDevFinal.db');
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $cashEarned = $_POST['correctGuess'];
 
-        $storedPwd = $db->query('SELECT Password FROM users WHERE Username=$email');
-        
+    $path = "/home/hz2330/databases";
+    $db = new SQLite3($path.'/webDevFinal.db');
 
-        if ($storedPwd == $password)
-        {
-            $email = $_SESSION['user_email']
-            $currTokensQuery = $db->prepare('SELECT Tokens,Cash FROM users WHERE email = :email');
-            $currTokensQuery->bindParam(':email', $email);
-            $currTokensQuery->execute();
-        
-            $currTokensResult = $currTokensQuery->fetch(PDO::FETCH_ASSOC);
+    $email = $_SESSION['user_email'];
+    $currTokensQuery = $db->prepare('SELECT Tokens, Cash FROM users WHERE email = :email');
+    $currTokensQuery->bindParam(':email', $email);
 
-            if ($currTokensResult) {
-                $currTokens = $currTokensResult['Tokens'];
-                $currCash = $currTokensResult['Cash'];
-                
-                $newCash = $currCash + $cashEarned;
+    $result = $currTokensQuery->execute();
+    
+    if ($result) {
+        $currTokensResult = $result->fetchArray(SQLITE3_ASSOC);
 
-                $updateStatement = $db->prepare('UPDATE users SET Cash = :newCash, Tokens = :currTokensMinus1 WHERE email = :email');
-                $updateStatement->bindParam(':newCash', $newCash);
-                $updateStatement->bindParam(':currTokensMinus1', $currTokens - 1);
-                $updateStatement->bindParam(':username', $email);
-                $updateStatement->execute();
+        if ($currTokensResult) {
+            $currTokens = $currTokensResult['Tokens'];
+            $currCash = $currTokensResult['Cash'];
+
+            $newCash = $currCash + $cashEarned;
+
+            $updateStatement = $db->prepare('UPDATE users SET Cash = :newCash, Tokens = :currTokensMinus1 WHERE email = :email');
+            $updateStatement->bindParam(':newCash', $newCash, SQLITE3_INTEGER);
+            $updateStatement->bindParam(':currTokensMinus1', $currTokens - 1, SQLITE3_INTEGER);
+            $updateStatement->bindParam(':email', $email);
+
+            $updateResult = $updateStatement->execute();
+
+            if ($updateResult) {
+                echo 'Tokens updated successfully';
+            } else {
+                echo 'Error updating tokens';
             }
+        } else {
+            echo 'No user found with the specified email';
         }
-
-        echo 'Tokens updated successfully';
-        $db->close();
+    } else {
+        echo 'Error executing the query';
+    }
+} else {
+    http_response_code(400);
+    echo 'Invalid request';
+}
 ?>

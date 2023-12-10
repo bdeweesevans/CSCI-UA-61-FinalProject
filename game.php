@@ -1,3 +1,6 @@
+<?php 
+    session_start(); 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -91,8 +94,6 @@
         </div>
         <h3 id="result">No repetition please! Confirm your choice by clicking the button below. </h3>
         <form onsubmit="showKey()" id="toSubmit">
-            Enter your Username: <input type="text" id="username" name="username">
-            Enter your Password: <input type="text" id="password" name="password">
             <input type="submit" name="submitBtn">
             <input type="reset">
         </form>
