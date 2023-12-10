@@ -7,7 +7,8 @@
     $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
 
-    $db = new SQLite3(__DIR__.'../../databases/webDevFinal.db');
+    $path = "/home/bdd6280/databases";
+    $db = new SQLite3($path.'/webDevFinal.db');
 
     $stmt = $db->prepare('SELECT * FROM users WHERE email = :email');   // prevent SQL injection
     $stmt->bindValue(':email', $email, SQLITE3_TEXT);

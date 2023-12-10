@@ -1,40 +1,40 @@
 <?php
-// Database connection
-$db = new SQLite3(__DIR__.'../../databases/webDevFinal.db');
+    // Database connection
+    $path = "/home/bdd6280/databases";
+    $db = new SQLite3($path.'/webDevFinal.db');
 
-// Grab product names from the database and put in list
-$productNames = "SELECT Product_name FROM products";
-$resultNames = $db->query($productNames);
-$productList = array();
-while ($row = $resultNames->fetchArray(SQLITE3_ASSOC)) {
-    $productList[] = $row['Product_name'];
-}
+    // Grab product names from the database and put in list
+    $productNames = "SELECT Product_name FROM products";
+    $resultNames = $db->query($productNames);
+    $productList = array();
+    while ($row = $resultNames->fetchArray(SQLITE3_ASSOC)) {
+        $productList[] = $row['Product_name'];
+    }
 
-// Grab prices from the database and put in list
-$prices = "SELECT Price FROM products";
-$resultPrice = $db->query($prices);
-$priceList = array();
-while ($row = $resultPrice->fetchArray(SQLITE3_ASSOC)) {
-    $priceList[] = $row['Price'];
-}
+    // Grab prices from the database and put in list
+    $prices = "SELECT Price FROM products";
+    $resultPrice = $db->query($prices);
+    $priceList = array();
+    while ($row = $resultPrice->fetchArray(SQLITE3_ASSOC)) {
+        $priceList[] = $row['Price'];
+    }
 
-// Grab descriptions from the database and put in list
-$descriptions = "SELECT Description FROM products";
-$resultDesc = $db->query($descriptions);
-$descriptionList = array();
-while ($row = $resultDesc->fetchArray(SQLITE3_ASSOC)) {
-    $descriptionList[] = $row['Description'];
-}
+    // Grab descriptions from the database and put in list
+    $descriptions = "SELECT Description FROM products";
+    $resultDesc = $db->query($descriptions);
+    $descriptionList = array();
+    while ($row = $resultDesc->fetchArray(SQLITE3_ASSOC)) {
+        $descriptionList[] = $row['Description'];
+    }
 
-// Close connection
-$db->close();
+    // Close connection
+    $db->close();
 
-// Check if the form is submitted
-$submitted = isset($_POST['searchInput']);
+    // Check if the form is submitted
+    $submitted = isset($_POST['searchInput']);
 
-// Get input from search form
-$input = $submitted ? $_POST['searchInput'] : '';
-
+    // Get input from search form
+    $input = $submitted ? $_POST['searchInput'] : '';
 ?>
 
 <!DOCTYPE html>

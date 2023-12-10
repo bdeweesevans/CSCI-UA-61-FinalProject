@@ -5,7 +5,7 @@
 <div class="header" style="font-weight:bold">
     <a href="./index.html">Home</a> |
     <a href="./products.php">Products</a> |
-    <a href="./search.html">Search</a> |
+    <a href="./search.php">Search</a> |
     <a href="./game.php">Game</a> |
     <a href="./contact.html">Contact</a> |
 
