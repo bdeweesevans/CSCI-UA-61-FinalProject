@@ -145,48 +145,36 @@ $(function()
     
     correct_count = 0;
     tokens_earn = correct_count*5;
-    function showKey(e)
-    {
+    function showKey(e) {
         e.preventDefault();
         console.log("showKey function is executed");
-        console.log($("#result").text());
-        key_ = keyGen();
+        let key_ = keyGen();
         console.log(key_);
-        for (i=0;i<5;i++)
-        {
+
+        correct_count = 0; // Reset correct count
+
+        for (let i = 0; i < 5; i++) {
             img_collection[i].src = cardSet[key_[i][0]][key_[i][1]];
         }
-        console.log(img_collection[0].src);
-        for (i=0;i<5;i++)
-        {
-            for (j=0;j<5;j++)
-            {
-                suit_ = convertSuit(document.querySelectorAll("form")[j][0].value);
-                num_ = convertNum(document.querySelectorAll("form")[j][1].value);
-                if (suit_ == key_[i][0] && num_ == key_[i][1])
-                {
-                    correct_count ++;
-                    tokens_earn = correct_count*5;
+
+        for (let j = 0; j < 5; j++) {
+            let userSelectedSuit = convertSuit(document.querySelectorAll("form")[j][1].value);
+            let userSelectedNum = convertNum(document.querySelectorAll("form")[j][0].value);
+
+            for (let i = 0; i < 5; i++) {
+                if (userSelectedSuit === key_[i][0] && userSelectedNum === key_[i][1]) {
+                    correct_count++;
                 }
             }
         }
-        $("#result").text("You got " + correct_count +" cards right! Buy tokens to try again");
 
-        $.ajax({
-            type: 'POST',
-            url: 'update_token.php',  
-            data: {
-                username: username,
-                correctGuess: correct_count,
-            },
-            success: function (response) {
-                console.log('Tokens updated successfully:', response);
-            },
-            error: function (error) {
-                console.error('Error updating tokens:', error);
-            }
-        });
+        tokens_earn = correct_count * 5; // Calculate tokens earned
+        $("#result").text("You got " + correct_count + " cards right! Buy tokens to try again");
+        
+        updateTokens(tokens_earn); // Update tokens
+        console.log($("#result").text());
     }
+
 
 
     $("#toSubmit").submit(function(e)

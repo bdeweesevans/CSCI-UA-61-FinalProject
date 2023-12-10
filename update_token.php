@@ -8,8 +8,7 @@ session_start();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $cashEarned = $_POST['correctGuess'];
 
-    $path = "/home/hz2330/databases";
-    $db = new SQLite3($path.'/webDevFinal.db');
+    $db = new SQLite3(__DIR__.'../../databases/webDevFinal.db');
 
     $email = $_SESSION['user_email'];
     $currTokensQuery = $db->prepare('SELECT tokens, cash FROM users WHERE email = :email');

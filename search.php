@@ -1,6 +1,6 @@
 <?php
 // Database connection
-$db = new SQLite3(__DIR__.'/webDevFinal.db');
+$db = new SQLite3(__DIR__.'../../databases/webDevFinal.db');
 
 // Grab product names from the database and put in list
 $productNames = "SELECT Product_name FROM products";
