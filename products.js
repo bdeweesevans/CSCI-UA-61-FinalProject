@@ -97,7 +97,7 @@ function receipt() {
     receiptContent += "<div class='left-column'>";
 
     // Products
-    let productsNames = ["Plane with Big Nose", "Pool Cleaning Service", "Breaking Bad's Los Pollos Hermanos"];
+    let productsNames = ["1 Hour PS5 Time", "1 Hour PC Time", "5 Game Tokens"];
     let j = 0;
     for (let i = 1; i <= 3; i++) {
         let quantity = document.getElementById("quantity" + i).value;

@@ -43,19 +43,18 @@ $input = $submitted ? $_POST['searchInput'] : '';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search</title>
-    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
+
+<script>
+    $(function () {
+        $("#header").load("header.php");
+    })
+</script>
+
 <body>
     <div class="container">
-        <div class="header" style="font-weight:bold">
-            <a href="./index.html">Home</a> |
-            <a href="./products.php">Products</a> |
-            <a href="./search.php">Search</a> |
-            <a href="./game.html">Game</a> |
-            <a href="./contact.html">Contact</a> |
-            <a href="./login.html">Login</a> |
-            <a href="./signup.html">Sign Up</a>
-        </div>
+        <div id="header"></div>
         <h1>Search Page</h1>
         <form class="form-container" method="post">
             <h3>Search for our products below: </h3>
