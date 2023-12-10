@@ -9,7 +9,7 @@
     $tokens = 0; // Default token balance
 
     // Assuming the database is in the same directory as this script
-    $db = new SQLite3(__DIR__.'../../databases/webDevFinal.db');
+    $db = new SQLite3('../../databases/webDevFinal.db');
 
     // Check if the email is already registered
     $checkStmt = $db->prepare('SELECT * FROM users WHERE email = :email');
