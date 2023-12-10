@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $db = new SQLite3($path.'/webDevFinal.db');
 
     $email = $_SESSION['user_email'];
-    $currTokensQuery = $db->prepare('SELECT Tokens, Cash FROM users WHERE email = :email');
+    $currTokensQuery = $db->prepare('SELECT tokens, cash FROM users WHERE email = :email');
     $currTokensQuery->bindParam(':email', $email);
 
     $result = $currTokensQuery->execute();
@@ -21,14 +21,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $currTokensResult = $result->fetchArray(SQLITE3_ASSOC);
 
         if ($currTokensResult) {
-            $currTokens = $currTokensResult['Tokens'];
-            $currCash = $currTokensResult['Cash'];
+            $currTokens = $currTokensResult['tokens'] - 1;
+            $currCash = $currTokensResult['cash'];
 
             $newCash = $currCash + $cashEarned;
 
-            $updateStatement = $db->prepare('UPDATE users SET Cash = :newCash, Tokens = :currTokensMinus1 WHERE email = :email');
+            $updateStatement = $db->prepare('UPDATE users SET cash = :newCash, tokens = :currTokensMinus1 WHERE email = :email');
             $updateStatement->bindParam(':newCash', $newCash, SQLITE3_INTEGER);
-            $updateStatement->bindParam(':currTokensMinus1', $currTokens - 1, SQLITE3_INTEGER);
+            $updateStatement->bindParam(':currTokensMinus1', $currTokens, SQLITE3_INTEGER);
             $updateStatement->bindParam(':email', $email);
 
             $updateResult = $updateStatement->execute();

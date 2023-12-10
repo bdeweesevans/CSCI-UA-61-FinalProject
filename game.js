@@ -174,7 +174,7 @@ $(function()
 
         $.ajax({
             type: 'POST',
-            url: 'update_tokens.php',  // Adjust the URL to the actual path of your PHP script
+            url: 'update_token.php',  
             data: {
                 username: username,
                 correctGuess: correct_count,
