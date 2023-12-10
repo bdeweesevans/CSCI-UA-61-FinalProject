@@ -6,7 +6,7 @@
     <a href="./index.html">Home</a> |
     <a href="./products.php">Products</a> |
     <a href="./search.html">Search</a> |
-    <a href="./game.html">Game</a> |
+    <a href="./game.php">Game</a> |
     <a href="./contact.html">Contact</a> |
 
     <?php
@@ -15,7 +15,7 @@
             echo '<a href="./logout.php">Logout</a>';
         } else {
             // Display Login and Signup
-            echo '<a href="./login.html">Login</a> |';
+            echo '<a href="./login.html">Login</a> | ';
             echo '<a href="./signup.html">Sign Up</a>';
         }
     ?>
