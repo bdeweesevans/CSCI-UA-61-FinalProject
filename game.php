@@ -93,6 +93,7 @@
         </div>
         <h3 id="result">No repetition please! Confirm your choice by clicking the button below. </h3>
         <form onsubmit="showKey()" id="toSubmit">
+            <!--input type="hidden" name="submitted" value="1"-->
             <input type="submit" name="submitBtn">
             <input type="reset">
         </form>
@@ -103,6 +104,10 @@
         <p>Contributors: BD, JC, HZ</p>
         <a href="https://github.com/bdeweesevans/webdev-final" target="_blank" rel="noopener noreferrer">Github</a>
     </footer>
+
+    <script>
+        var userTokens = <?php echo isset($_SESSION['tokens']) ? $_SESSION['tokens'] : 0; ?>;
+    </script>
     <!-- Jquery -->
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 

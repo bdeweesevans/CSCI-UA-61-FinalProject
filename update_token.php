@@ -5,11 +5,13 @@ error_reporting(E_ALL);
 
 session_start();
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') 
+{
     $cashEarned = $_POST['correctGuess'];
 
-    $path = "/home/bdd6280/databases";
+    $path = "/home/hz2330/databases";
     $db = new SQLite3($path.'/webDevFinal.db');
+    
 
     $email = $_SESSION['user_email'];
     $currTokensQuery = $db->prepare('SELECT tokens, cash FROM users WHERE email = :email');
@@ -17,10 +19,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $result = $currTokensQuery->execute();
     
-    if ($result) {
+    if ($result) 
+    {
         $currTokensResult = $result->fetchArray(SQLITE3_ASSOC);
 
-        if ($currTokensResult) {
+        if ($currTokensResult) 
+        {
             $currTokens = $currTokensResult['tokens'] - 1;
             $currCash = $currTokensResult['cash'];
 
@@ -33,18 +37,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $updateResult = $updateStatement->execute();
 
-            if ($updateResult) {
+            if ($updateResult) 
+            {
                 echo 'Tokens updated successfully';
-            } else {
+            } 
+            else 
+            {
                 echo 'Error updating tokens';
             }
-        } else {
+        } 
+        else 
+        {
             echo 'No user found with the specified email';
         }
-    } else {
+    } 
+    else 
+    {
         echo 'Error executing the query';
     }
-} else {
+} 
+else 
+{
     http_response_code(400);
     echo 'Invalid request';
 }

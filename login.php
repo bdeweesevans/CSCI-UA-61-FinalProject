@@ -7,7 +7,7 @@
     $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
 
-    $path = "/home/bdd6280/databases";
+    $path = "/home/hz2330/databases";
     $db = new SQLite3($path.'/webDevFinal.db');
 
     $stmt = $db->prepare('SELECT * FROM users WHERE email = :email');   // prevent SQL injection
@@ -21,6 +21,15 @@
             // Session variables
             $_SESSION['user_email'] = $email;
             $_SESSION['logged_in'] = true;
+
+            $tokensQuery = $db->prepare('SELECT tokens FROM users WHERE email = :email');
+            $tokensQuery->bindValue(':email', $email, SQLITE3_TEXT);
+            $tokensResult = $tokensQuery->execute();
+
+            if ($tokensRow = $tokensResult->fetchArray()) 
+            {
+                $_SESSION['tokens'] = $tokensRow['tokens'];
+            }
 
             // Redirect to different page after successful login
             header('Location: products.php');

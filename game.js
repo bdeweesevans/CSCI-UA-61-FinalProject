@@ -1,6 +1,6 @@
-
 $(function()
 {
+    console.log("User tokens:", userTokens);
     var cardSet = new Array(4);
     cardSet[0] = ["0","assets/cardimages/clubs_ace.png","assets/cardimages/clubs_2.png","assets/cardimages/clubs_3.png","assets/cardimages/clubs_4.png","assets/cardimages/clubs_5.png","assets/cardimages/clubs_6.png","assets/cardimages/clubs_7.png","assets/cardimages/clubs_8.png","assets/cardimages/clubs_9.png","assets/cardimages/clubs_10.png","assets/cardimages/clubs_jack.png","assets/cardimages/clubs_queen.png","assets/cardimages/clubs_king.png"];
     cardSet[1] = ["0","assets/cardimages/diamonds_ace.png","assets/cardimages/diamonds_2.png","assets/cardimages/diamonds_3.png","assets/cardimages/diamonds_4.png","assets/cardimages/diamonds_5.png","assets/cardimages/diamonds_6.png","assets/cardimages/diamonds_7.png","assets/cardimages/diamonds_8.png","assets/cardimages/diamonds_9.png","assets/cardimages/diamonds_10.png","assets/cardimages/diamonds_jack.png","assets/cardimages/diamonds_queen.png","assets/cardimages/diamonds_king.png"];
@@ -148,31 +148,44 @@ $(function()
     function showKey(e) {
         e.preventDefault();
         console.log("showKey function is executed");
-        let key_ = keyGen();
-        console.log(key_);
+        if (userTokens > 0) 
+        {
+            let key_ = keyGen();
+            console.log(key_);
 
-        correct_count = 0; // Reset correct count
+            correct_count = 0; 
 
-        for (let i = 0; i < 5; i++) {
-            img_collection[i].src = cardSet[key_[i][0]][key_[i][1]];
-        }
+            for (let i = 0; i < 5; i++) 
+            {
+                img_collection[i].src = cardSet[key_[i][0]][key_[i][1]];
+            }
 
-        for (let j = 0; j < 5; j++) {
-            let userSelectedSuit = convertSuit(document.querySelectorAll("form")[j][1].value);
-            let userSelectedNum = convertNum(document.querySelectorAll("form")[j][0].value);
+            for (let j = 0; j < 5; j++) 
+            {
+                let userSelectedNum = convertNum(document.querySelectorAll("form")[j][0].value);
+                let userSelectedSuit = convertSuit(document.querySelectorAll("form")[j][1].value);
 
-            for (let i = 0; i < 5; i++) {
-                if (userSelectedSuit === key_[i][0] && userSelectedNum === key_[i][1]) {
-                    correct_count++;
+                for (let i = 0; i < 5; i++) 
+                {
+                    if (userSelectedSuit === key_[i][0] && userSelectedNum === key_[i][1]) 
+                    {
+                        correct_count++;
+                    }
                 }
             }
-        }
 
-        tokens_earn = correct_count * 5; // Calculate tokens earned
-        $("#result").text("You got " + correct_count + " cards right! Buy tokens to try again");
+            $("#result").text("You got " + correct_count + " cards right! Buy tokens to try again");
+            tokens_earn = correct_count * 5; // Calculate tokens earned
         
-        updateTokens(tokens_earn); // Update tokens
-        console.log($("#result").text());
+            console.log($("#result").text());
+            updateTokens(tokens_earn); // Update tokens
+        } 
+        else 
+        {
+            $("#result").text("You don't have enough tokens. Buy tokens to play.");
+            alert("You don't have enough tokens. Buy tokens to play.");
+        }
+        
     }
 
 
