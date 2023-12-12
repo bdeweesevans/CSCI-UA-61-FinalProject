@@ -30,13 +30,12 @@
                     $path = "/home/bdd6280/databases";
                     $db = new SQLite3($path.'/webDevFinal.db');
 
-                    $stmt = $db->prepare('SELECT email, cash, tokens FROM users WHERE email = :email');
+                    $stmt = $db->prepare('SELECT email, tokens FROM users WHERE email = :email');
                     $stmt->bindValue(':email', $userEmail, SQLITE3_TEXT);
                     $result = $stmt->execute();
 
                     if ($row = $result->fetchArray()) {
                         echo "<p>Email: " . htmlspecialchars($row['email']) . "</p>";
-                        echo "<p>Cash Balance: $" . htmlspecialchars($row['cash']) . "</p>";
                         echo "<p>Tokens: " . htmlspecialchars($row['tokens']) . "</p>";
                     } else {
                         echo "<p>User data not found.</p>";
