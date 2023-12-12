@@ -186,6 +186,7 @@ $(function()
             alert("You don't have enough tokens. Buy tokens to play.");
         }
         
+        updateTokens(tokens_earn);
     }
 
 
@@ -225,8 +226,5 @@ $(function()
             console.error('Error:', error);
         });
     }
-    
-    updateTokens(tokens_earn);
-    
     
 });
