@@ -3,8 +3,6 @@
     if (isset($_SESSION['user_email'])) 
     {
         $userEmail = $_SESSION['user_email'];
-        // Debugging: Display the email being used
-        echo "User Email: " . htmlspecialchars($userEmail) . "<br>";
     
         $path = "/home/bdd6280/databases";
         $db = new SQLite3($path.'/webDevFinal.db');
