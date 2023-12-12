@@ -3,10 +3,11 @@
     if (isset($_SESSION['user_email'])) 
     {
         $userEmail = $_SESSION['user_email'];
+        // Debugging: Display the email being used
+        echo "User Email: " . htmlspecialchars($userEmail) . "<br>";
     
-        //$path = "/home/bdd6280/databases";
-        //$db = new SQLite3($path.'/webDevFinal.db');
-        $db = new SQLite3(__DIR__.'/webDevFinal.db');
+        $path = "/home/bdd6280/databases";
+        $db = new SQLite3($path.'/webDevFinal.db');
     
         $stmt = $db->prepare('SELECT tokens FROM users WHERE email = :email');
         $stmt->bindValue(':email', $userEmail, SQLITE3_TEXT);
