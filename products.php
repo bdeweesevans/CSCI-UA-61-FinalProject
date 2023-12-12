@@ -4,7 +4,7 @@
 
     function updateTokens($userEmail, $additionalTokens) {
         try {
-            $path = "/home/bdd6280/databases";
+            $path = "/home/hz2330/databases";
             $db = new SQLite3($path.'/webDevFinal.db');
             $db->exec('BEGIN');
             $stmt = $db->prepare('UPDATE users SET tokens = tokens + :tokens WHERE email = :email');
@@ -26,7 +26,7 @@
         if (!filter_var($providedEmail, FILTER_VALIDATE_EMAIL)) {
             $response = ['success' => false, 'error' => 'Invalid email format.'];
         } else {
-            $path = "/home/bdd6280/databases";
+            $path = "/home/hz2330/databases";
             $db = new SQLite3($path.'/webDevFinal.db');
             $stmt = $db->prepare('SELECT email FROM users WHERE email = :email');
             $stmt->bindValue(':email', $providedEmail, SQLITE3_TEXT);

@@ -1,6 +1,6 @@
 <?php
     // Database connection
-    $path = "/home/bdd6280/databases";
+    $path = "/home/hz2330/databases";
     $db = new SQLite3($path.'/webDevFinal.db');
 
     // Grab product names from DB

@@ -185,8 +185,6 @@ $(function()
             $("#result").text("You don't have enough tokens. Buy tokens to play.");
             alert("You don't have enough tokens. Buy tokens to play.");
         }
-        
-        updateTokens(tokens_earn);
     }
 
 

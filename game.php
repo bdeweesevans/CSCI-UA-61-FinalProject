@@ -104,10 +104,11 @@
         <p>Contributors: BD, JC, HZ</p>
         <a href="https://github.com/bdeweesevans/webdev-final" target="_blank" rel="noopener noreferrer">Github</a>
     </footer>
-
     <script>
-        var userTokens = <?php echo isset($_SESSION['tokens']) ? $_SESSION['tokens'] : 0; ?>;
+        var userTokens = <?php echo json_encode($_SESSION['tokens']); ?>;
     </script>
+    
+
     <!-- Jquery -->
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
