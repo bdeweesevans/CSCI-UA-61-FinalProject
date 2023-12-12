@@ -181,3 +181,7 @@ footer {
 .game{
     max-width: 1024px;
 }
+
+.hidden {
+    display: none;
+}

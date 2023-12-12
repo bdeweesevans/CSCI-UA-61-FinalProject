@@ -56,7 +56,6 @@
     }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -78,7 +77,7 @@
     <div class="container">
         <div id="header"></div>
         <h1>Shopping</h1>
-        <form action="#" method="post">
+        <form action="#" method="post" id="myForm">
             <h2>Our Shop:</h2>
             <div id="product1">
                 <h3>1 Hour PS5 Time</h3>
@@ -170,6 +169,13 @@
     </footer>
 
     <script src="products.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#myForm').on('submit', function(e) {
+                this.reset();
+            });
+        });
+    </script>
 </body>
 
 </html>
