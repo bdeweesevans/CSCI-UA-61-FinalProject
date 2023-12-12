@@ -3,7 +3,7 @@
     $path = "/home/hz2330/databases";
     $db = new SQLite3($path.'/webDevFinal.db');
 
-    // Grab product names from the database and put in list
+    // Grab product names from DB
     $productNames = "SELECT Product_name FROM products";
     $resultNames = $db->query($productNames);
     $productList = array();
@@ -11,7 +11,7 @@
         $productList[] = $row['Product_name'];
     }
 
-    // Grab prices from the database and put in list
+    // Grab prices from DB
     $prices = "SELECT Price FROM products";
     $resultPrice = $db->query($prices);
     $priceList = array();
@@ -19,7 +19,7 @@
         $priceList[] = $row['Price'];
     }
 
-    // Grab descriptions from the database and put in list
+    // Grab descriptions from DB
     $descriptions = "SELECT Description FROM products";
     $resultDesc = $db->query($descriptions);
     $descriptionList = array();
@@ -27,10 +27,9 @@
         $descriptionList[] = $row['Description'];
     }
 
-    // Close connection
     $db->close();
 
-    // Check if the form is submitted
+    // Check if form is submitted
     $submitted = isset($_POST['searchInput']);
 
     // Get input from search form
@@ -50,7 +49,15 @@
 <script>
     $(function () {
         $("#header").load("header.php");
-    })
+
+        $('.reset-button').on('click', function() {
+            $('#searchResults').hide();
+
+            $('input[name="searchInput"]').val('');
+        });
+    });
+</script>
+
 </script>
 
 <body>
@@ -63,31 +70,30 @@
             <button type="submit" class="submit-button">Submit</button>
             <button type="reset" class="reset-button">Clear</button>
         </form>
-        <div class="container">
-            <?php
-            if ($submitted) {
-                $index = -1;
-                $resultsFound = false; 
+        <?php if ($submitted): ?>
+            <div class="container" id="searchResults">
+                <?php
+                    if ($submitted) {
+                        $resultsFound = false;
 
-                // Run loop to check if user input matches a product
-                foreach ($productList as $element) {
-                    $index++;
-                    // Echo all information if match is found
-                    if (stripos($element, $input) !== false) {
-                        $resultsFound = true; 
-                        echo ("<li> $element </li>");
-                        echo ("<li> Price: $$priceList[$index] </li>");
-                        echo ("<li> $descriptionList[$index] </li><br>");
+                        foreach ($productList as $index => $productName) {
+                            $priceString = strval($priceList[$index]);
+
+                            if (stripos($productName, $input) !== false || stripos($descriptionList[$index], $input) !== false || $priceString === $input) {
+                                $resultsFound = true;
+                                echo ("<li> $productName </li>");
+                                echo ("<li> Price: $" . $priceList[$index] . " </li>");
+                                echo ("<li> " . $descriptionList[$index] . " </li><br>");
+                            }
+                        }
+
+                        if (!$resultsFound) {
+                            echo ("We don’t have this product at our shop.");
+                        }
                     }
-                }
-
-                // Echo message if there is no match
-                if (!$resultsFound) {
-                    echo ("We don’t have this product at our shop.");
-                }
-            }
-            ?>
-        </div>
+                ?>
+            </div>
+        <?php endif; ?>
     </div>
     <br>
     <footer>
