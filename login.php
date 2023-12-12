@@ -9,7 +9,6 @@
 
     $path = "/home/bdd6280/databases";
     $db = new SQLite3($path.'/webDevFinal.db');
-    //$db = new SQLite3(__DIR__.'/webDevFinal.db');
 
     $stmt = $db->prepare('SELECT * FROM users WHERE email = :email');   // prevent SQL injection
     $stmt->bindValue(':email', $email, SQLITE3_TEXT);
@@ -41,7 +40,7 @@
     if ($login_success) {
         echo "<script>alert('Login successful! Welcome, $email');</script>";
     } else {
-        echo "<script>alert('Login failed! Incorrect email or password. $email, $password'); window.location.href='login.html';</script>";
+        echo "<script>alert('Login failed! Incorrect email or password.'); window.location.href='login.html';</script>";
     }
 
     $db->close();
