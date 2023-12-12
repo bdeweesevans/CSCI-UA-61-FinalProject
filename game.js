@@ -223,6 +223,7 @@ $(function()
         .catch(error => {
             console.error('Error:', error);
         });
+        $("#tokenDisplay").load("display_tokens.php");
     }
     
 });
