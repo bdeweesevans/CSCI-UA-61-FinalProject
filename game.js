@@ -144,7 +144,7 @@ $(function()
     var password = $("#password").val();
     
     correct_count = 0;
-    tokens_earn = correct_count*5;
+    tokens_earn = correct_count*2;
     function showKey(e) {
         e.preventDefault();
         console.log("showKey function is executed");
@@ -175,7 +175,7 @@ $(function()
             }
 
             $("#result").text("You got " + correct_count + " cards right! Buy tokens to try again");
-            tokens_earn = correct_count * 5; // Calculate tokens earned
+            tokens_earn = correct_count * 2; // Calculate tokens earned
         
             console.log($("#result").text());
             updateTokens(tokens_earn); // Update tokens
