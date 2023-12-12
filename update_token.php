@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
 {
     $cashEarned = $_POST['correctGuess'];
 
-    $path = "/home/hz2330/databases";
+    $path = "/home/bdd6280/databases";
     $db = new SQLite3($path.'/webDevFinal.db');
     
 

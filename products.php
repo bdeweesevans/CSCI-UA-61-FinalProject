@@ -4,7 +4,7 @@
 
     function updateTokens($userEmail, $additionalTokens) {
         try {
-            $path = "/home/hz2330/databases";
+            $path = "/home/bdd6280/databases";
             $db = new SQLite3($path.'/webDevFinal.db');
             $db->exec('BEGIN');
             $stmt = $db->prepare('UPDATE users SET tokens = tokens + :tokens WHERE email = :email');

@@ -22,7 +22,7 @@
     <div class="container game">
         <div id="header"></div>
         <h2>
-            Slot Machine
+            Card Game
         </h2>
         <h3>
             Keys:
