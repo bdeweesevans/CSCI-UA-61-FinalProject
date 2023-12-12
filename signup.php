@@ -9,7 +9,7 @@
     $tokens = 0; // Default token balance
 
     // Assuming the database is in the same directory as this script
-    $path = "/home/hz2330/databases";
+    $path = "/home/bdd6280/databases";
     $db = new SQLite3($path.'/webDevFinal.db');
 
     // Check if the email is already registered

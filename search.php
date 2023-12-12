@@ -1,8 +1,7 @@
 <?php
     // Database connection
-    //$path = "/home/hz2330/databases";
-    //$db = new SQLite3($path.'/webDevFinal.db');
-    $db = new SQLite3(__DIR__.'/webDevFinal.db');
+    $path = "/home/bdd6280/databases";
+    $db = new SQLite3($path.'/webDevFinal.db');
 
     // Grab product names from DB
     $productNames = "SELECT Product_name FROM products";
