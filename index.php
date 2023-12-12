@@ -44,7 +44,7 @@
 
                     $db->close();
                 } else {
-                    echo "<p>Please <a href='./login.html'>Login</a></p>";
+                    echo "<p>Please <a href='./login.html'>Login.</a></p>";
                 }
             ?>
         </div>
