@@ -2,7 +2,6 @@ function total() {
     var grandTotal = 0;
     var prices = [12, 20, 10]; 
 
-    // Update subtotal + add subs to total
     for (var i = 1; i <= 3; i++) {
         var quantity = parseInt(document.getElementById('quantity' + i).value);
         if (isNaN(quantity) || quantity < 0) {
@@ -14,16 +13,15 @@ function total() {
         grandTotal += subtotal;
     }
 
-    // Update total total
     document.getElementById('grandTotal').innerText = grandTotal.toFixed(2);
 }
 
-// Event listeners for product changes
+// Event listeners for products
 document.getElementById('quantity1').addEventListener('change', total);
 document.getElementById('quantity2').addEventListener('change', total);
 document.getElementById('quantity3').addEventListener('change', total);
 
-// Event listener for reset event
+// Event listener for reset
 const f = document.forms[0];
 f.addEventListener("reset", (event) => {
     event.preventDefault();
@@ -33,18 +31,19 @@ f.addEventListener("reset", (event) => {
     total(); // Recalculate total
 });
 
-// Event listener for submit event
+// Event listener for submit
 f.addEventListener("submit", (event) => {
     event.preventDefault();
 
-    total(); // Ensure totals are updated
+    total();    // Update totals
 
     let totalQuantity = 0;
     let isValid = true;
 
-    // Check each product quantity
+    // Check products quantity
     for (let i = 1; i <= 3; i++) {
         let quantity = parseInt(document.getElementById('quantity' + i).value);
+        console.log(`Quantity for product ${i}:`, quantity);  // Log each product's quantity
         if (isNaN(quantity) || quantity < 0) {
             alert('Please enter a valid quantity for all products.');
             isValid = false;
@@ -59,7 +58,7 @@ f.addEventListener("submit", (event) => {
     }
 
     const requiredFields = ['name', 'phone', 'email', 'address-street', 'address-city', 'address-state', 'address-areacode', 'cc-name', 'cc-number', 'cc-expiration', 'cc-cvv'];
-    // Check each required field
+    // Check required fields
     requiredFields.forEach(function(fieldId) {
         const field = document.getElementById(fieldId);
         if (!field.value.trim()) {
@@ -72,20 +71,38 @@ f.addEventListener("submit", (event) => {
 
     if (!isValid) return;
 
-    // Submit form data using AJAX
     var formData = new FormData(f);
+
+    // Create data objects to pass to receipt
+    var productsData = {
+        quantity1: document.getElementById("quantity1").value,
+        quantity2: document.getElementById("quantity2").value,
+        quantity3: document.getElementById("quantity3").value,
+        grandTotal: document.getElementById("grandTotal").innerText
+    };
+
+    var customerData = {
+        name: document.getElementById("name").value,
+        phone: document.getElementById("phone").value,
+        email: document.getElementById("email").value,
+        addressStreet: document.getElementById("address-street").value,
+        addressCity: document.getElementById("address-city").value,
+        addressState: document.getElementById("address-state").value,
+        addressAreaCode: document.getElementById("address-areacode").value,
+        ccNumber: document.getElementById('cc-number').value
+    };
+
+    // AJAX call
     fetch('products.php', {
         method: 'POST',
         body: formData
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data);
+        console.log('AJAX Response:', data);
         if (data.success) {
-            // If the server responds with success, generate the receipt
-            receipt();
+            receipt(productsData, customerData);
         } else {
-            // Handle failure (e.g., show an error message)
             alert(data.error);
         }
     })
@@ -94,7 +111,7 @@ f.addEventListener("submit", (event) => {
     });
 });
 
-function receipt() {
+function receipt(productsData, customerData) {
     console.log('Generating receipt');
     var newWindow = window.open("", "_blank");
 
@@ -105,40 +122,30 @@ function receipt() {
 
     // Products
     let productsNames = ["1 Hour PS5 Time", "1 Hour PC Time", "5 Game Tokens"];
-    let j = 0;
-    for (let i = 1; i <= 3; i++) {
-        let quantity = document.getElementById("quantity" + i).value;
-        let subtotal = document.getElementById("subtotal" + i).innerText;
-        receiptContent += "<p>" + productsNames[j] + ": Quantity - " + quantity + ", Subtotal - $" + subtotal + "</p>";
-        j ++;
+    for (let i = 0; i < productsNames.length; i++) {
+        let quantity = productsData[`quantity${i+1}`];
+        let subtotal = quantity * [12, 20, 10][i];
+        receiptContent += "<p>" + productsNames[i] + ": Quantity - " + quantity + ", Subtotal - $" + subtotal.toFixed(2) + "</p>";
     }
 
-    let grandTotal = document.getElementById("grandTotal").innerText;
+    let grandTotal = productsData['grandTotal'];
     receiptContent += "<p>Grand Total: $" + grandTotal + "</p>";
 
-    let name = document.getElementById("name").value;
-    let phone = document.getElementById("phone").value;
-    let email = document.getElementById("email").value;
-    let addressStreet = document.getElementById("address-street").value;
-    let addressCity = document.getElementById("address-city").value;
-    let addressState = document.getElementById("address-state").value;
-    let addressAreaCode = document.getElementById("address-areacode").value;
+    // Customer Data
+    receiptContent += "<p>Name: " + customerData['name'] + "</p>";
+    receiptContent += "<p>Phone: " + customerData['phone'] + "</p>";
+    receiptContent += "<p>Email: " + customerData['email'] + "</p>";
+    receiptContent += "<p>Address: " + customerData['addressStreet'] + ", " + customerData['addressCity'] + ", " + customerData['addressState'] + " " + customerData['addressAreaCode'] + "</p>";
 
-    receiptContent += "<p>Name: " + name + "</p>";
-    receiptContent += "<p>Phone: " + phone + "</p>";
-    receiptContent += "<p>Email: " + email + "</p>";
-    receiptContent += "<p>Address: " + addressStreet + ", " + addressCity + ", " + addressState + " " + addressAreaCode + "</p>";
-
-    // CC # code
-    let ccNumber = document.getElementById('cc-number').value;
-    let maskedNumber = ccNumber.slice(0, -4).replace(/\d/g, 'x') + ccNumber.slice(-4);
+    // CC
+    let maskedNumber = customerData['ccNumber'].slice(0, -4).replace(/\d/g, 'x') + customerData['ccNumber'].slice(-4);
     receiptContent += "<p>Credit Card Number: " + maskedNumber + "</p>";
 
     receiptContent += "</div>";
-
     receiptContent += "<footer><p>Contributors: BD, JC, HZ</p><a href='https://github.com/bdeweesevans/webdev-final' target='_blank' rel='noopener noreferrer'>Github</a></footer></body></html>";
 
-    // Write to new document
+    // Write
     newWindow.document.write(receiptContent);
 }
+
 

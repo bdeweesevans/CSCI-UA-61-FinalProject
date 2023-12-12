@@ -10,7 +10,7 @@
     $path = "/home/bdd6280/databases";
     $db = new SQLite3($path.'/webDevFinal.db');
 
-    // Check if the email is already registered
+    // Check if email is already registered
     $checkStmt = $db->prepare('SELECT * FROM users WHERE email = :email');
     $checkStmt->bindValue(':email', $email, SQLITE3_TEXT);
     $result = $checkStmt->execute();

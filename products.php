@@ -50,7 +50,7 @@
         }
 
         header('Content-Type: application/json');
-        ob_end_clean(); // Clean (discard) the output buffer
+        ob_end_clean(); // Clean output buffer
         echo json_encode($response);
         exit;
     }
