@@ -96,8 +96,8 @@
         <h3 id="result">No repetition please! Confirm your choice by clicking the button below. </h3>
         <form onsubmit="showKey()" id="toSubmit">
             <!--input type="hidden" name="submitted" value="1"-->
-            <input type="submit" name="submitBtn">
-            <input type="reset">
+            <input type="submit" class="submit-button" name="submitBtn">
+            <input type="reset" class="reset-button">
         </form>
         
     </div>

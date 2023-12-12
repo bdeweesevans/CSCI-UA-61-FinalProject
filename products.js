@@ -5,6 +5,10 @@ function total() {
     // Update subtotal + add subs to total
     for (var i = 1; i <= 3; i++) {
         var quantity = parseInt(document.getElementById('quantity' + i).value);
+        if (isNaN(quantity) || quantity < 0) {
+            alert('Please enter a valid quantity for all products.');
+            return;
+        }
         var subtotal = quantity * prices[i - 1];
         document.getElementById('subtotal' + i).innerText = subtotal.toFixed(2);
         grandTotal += subtotal;
@@ -33,19 +37,25 @@ f.addEventListener("reset", (event) => {
 f.addEventListener("submit", (event) => {
     event.preventDefault();
 
+    total(); // Ensure totals are updated
+
     let totalQuantity = 0;
     let isValid = true;
 
     // Check each product quantity
     for (let i = 1; i <= 3; i++) {
         let quantity = parseInt(document.getElementById('quantity' + i).value);
+        if (isNaN(quantity) || quantity < 0) {
+            alert('Please enter a valid quantity for all products.');
+            isValid = false;
+            break;
+        }
         totalQuantity += quantity;
     }
 
-    // Check if at least one product is in cart
-    if (totalQuantity === 0) {
+    if (!isValid || totalQuantity === 0) {
         alert("Please add at least one product to your order.");
-        isValid = false;
+        return;
     }
 
     const requiredFields = ['name', 'phone', 'email', 'address-street', 'address-city', 'address-state', 'address-areacode', 'cc-name', 'cc-number', 'cc-expiration', 'cc-cvv'];
@@ -55,37 +65,34 @@ f.addEventListener("submit", (event) => {
         if (!field.value.trim()) {
             field.style.backgroundColor = 'red';
             isValid = false;
-        } 
-        else {
+        } else {
             field.style.backgroundColor = ''; // Resets
         }
     });
 
-    // Generates receipt
-    if (isValid) {
-        // Submit form data using AJAX
-        var formData = new FormData(f);
-        fetch('products.php', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            if (data.success) {
-                // If the server responds with success, generate the receipt
-                receipt();
-            } 
-            else {
-                // Handle failure (e.g., show an error message)
-                alert(data.error);
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-    }
+    if (!isValid) return;
+
+    // Submit form data using AJAX
+    var formData = new FormData(f);
+    fetch('products.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        if (data.success) {
+            // If the server responds with success, generate the receipt
+            receipt();
+        } else {
+            // Handle failure (e.g., show an error message)
+            alert(data.error);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
     });
+});
 
 function receipt() {
     console.log('Generating receipt');
