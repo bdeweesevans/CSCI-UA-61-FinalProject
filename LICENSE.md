@@ -4,4 +4,4 @@ Unauthorized copying, reuse, or any other reproduction of this project or its fi
 
 This is proprietary work.
 
-Written by Benjamin DeWeese van Schooneveld, 2024-04-13
+Written by Benjamin DeWeese van Schooneveld, 2024-04-13.
